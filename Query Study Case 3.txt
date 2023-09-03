@@ -1,0 +1,20 @@
+SELECT
+    customers.CustomerEmail AS cust_email,
+    customers.CustomerCity AS cust_city,
+    orders.DateOrder AS order_date,
+    orders.Quantity AS order_qty,
+    products.ProdName AS product_name,
+    products.Price AS product_price,
+    product_category.CategoryName AS category_name,
+    (orders.Quantity * products.Price) AS total_sales
+FROM
+  My_Project.customers
+JOIN
+    My_Project.orders ON customers.CustomerID = orders.CustomerID  
+JOIN
+    My_Project.products ON orders.ProdNumber = products.ProdNumber
+JOIN
+    My_Project.product_category ON products.Category = product_category.CategoryID
+ORDER BY
+  orders.DateOrder,
+  orders.quantity;
